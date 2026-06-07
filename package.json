@@ -1,0 +1,18 @@
+{
+  "name": "streamwrap-desktop",
+  "version": "1.0.0",
+  "description": "An open-source native desktop wrapper for media servers.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . StreamWrap --platform=win32 --arch=x64 --icon=icon.ico --out=dist --overwrite --electron-version=42.3.3"
+  },
+  "author": "Open Source",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^42.3.3",
+    "electron-packager": "^17.1.2",
+    "jimp": "^0.16.13",
+    "png-to-ico": "^3.0.1"
+  }
+}

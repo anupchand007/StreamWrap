@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamWrap Setup</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 400px;
+    }
+    h1 {
+      margin-top: 0;
+      color: #00bcd4;
+    }
+    p {
+      color: #b3b3b3;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: white;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input:focus {
+      outline: none;
+      border-color: #00bcd4;
+    }
+    button {
+      background-color: #00bcd4;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #0097a7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>StreamWrap</h1>
+    <p>Enter your Media Server URL (e.g. http://192.168.1.100:8096) to connect.</p>
+    <input type="text" id="serverUrl" placeholder="http://ip:port" />
+    <button onclick="saveAndConnect()">Connect</button>
+  </div>
+
+  <script>
+    async function loadSaved() {
+      const saved = await window.api.getUrl();
+      if (saved) document.getElementById('serverUrl').value = saved;
+    }
+    
+    function saveAndConnect() {
+      const url = document.getElementById('serverUrl').value.trim();
+      if (url) {
+        window.api.saveUrl(url);
+      } else {
+        alert('Please enter a valid URL');
+      }
+    }
+    
+    loadSaved();
+  </script>
+</body>
+</html>
