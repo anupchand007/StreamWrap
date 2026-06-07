@@ -52,23 +52,7 @@ function createWindow() {
   }
 
   // Inject script to keep native OSD active
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.executeJavaScript(`
-      (function() {
-        let lastMove = 0;
-        window.addEventListener('mousemove', () => {
-          const now = Date.now();
-          if (now - lastMove > 1000) {
-            lastMove = now;
-            const ev = new KeyboardEvent('keydown', {
-              bubbles: true, cancelable: true, keyCode: 17, key: 'Control'
-            });
-            document.dispatchEvent(ev);
-          }
-        }, { passive: true });
-      })();
-    `);
-  });
+  // The OSD wake-up fix is now securely injected via preload.js.
 
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
